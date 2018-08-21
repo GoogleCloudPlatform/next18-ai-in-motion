@@ -22,11 +22,11 @@ from gym.utils import seeding
 from itertools import combinations
 from collections import deque
 import time
-import platform
 
 import pygame
 from pygame.color import THECOLORS
 import pymunk
+from pymunk import Vec2d
 import pymunk.pygame_util
 
 
@@ -35,15 +35,17 @@ class SpheresEnv(gym.Env):
     agent sphere, while trying to approach the target location."""
     metadata = {'render.modes': ['human']}
 
-    def __init__(self, n_obstacles=2, shape=(400, 400), delay=0, render_screen=False, debug=False, episode_length=200, noisy=True):
+    def __init__(self, n_obstacles=2, shape=(400, 400), delay=0, render_screen=False, episode_length=200, noisy=True):
         self.n_obstacles = n_obstacles
 
         self.render_screen = render_screen
-        self.debug = debug
         self.noisy = noisy
 
-        # delayed states
+        # delayed states, so that the agent is forced
+        # to learn the correct behavior from outdated
+        # states
         self.delay = delay
+
         # in chronological order using append
         self.state_buffer = deque([], maxlen=self.delay+1)
 
@@ -79,17 +81,69 @@ class SpheresEnv(gym.Env):
 
 
     def pre_step_reward_fn(self):
-        pass
+        # record the velocity before action
+        self.sphere.data['pre_velocity'] = self.sphere.body.velocity
 
 
     def post_step_reward_fn(self):
-        self.sphere.reward += 10.0
+        # calculate the velocity after the action
+        def target_force(position, other_position, repulse=True):
+            # specify a potential field
+            v = Vec2d(tuple(other_position - position))
+            l = v.normalize_return_length()
+
+            if repulse:
+                v *= (-50.0 / l)
+            else:
+                v *= (l / 50.0)
+
+            return v
+
+        pre_v = self.sphere.data['pre_velocity']
+        v = self.sphere.body.velocity
+        change = (v - pre_v).normalized()
+
+        position = self.sphere.body.position
+        target = self.sphere.target
+
+        attraction = target_force(position, target, repulse=False)
+
+        chaser_repulsion = target_force(position, self.chaser.body.position)
+        obstacle_repulsion = sum([target_force(position, obs.data['position']) for obs in self.obstacles])
+
+        # avoid walls
+        wall_repulsion = 50.0 * (Vec2d(1, 0) / position[0] + Vec2d(-1, 0) / (self.width - position[0]) + Vec2d(0, 1) / position[1] + Vec2d(0, -1) / (self.height - position[1]))
+
+        # the base weights will be adjusted with aggressiveness
+        base_weights = {
+            'target': 1.0,
+            'chaser': 8.0,
+            'obstacle': 9.0,
+            'wall': 5.0,
+        }
+        w_wall = base_weights['wall']
+        w_obstacle = base_weights['obstacle']
+
+        bw_target = base_weights['target']
+        bw_chaser = base_weights['chaser']
+
+        # the aggressiveness represents a trade off between
+        # avoiding the chaser and approaching the target
+        d = (bw_chaser - bw_target) / 2
+        w_target = bw_target + self.aggressiveness * d
+        w_chaser = bw_chaser - self.aggressiveness * d
+
+        target = w_target * attraction + w_chaser * chaser_repulsion + w_obstacle * obstacle_repulsion + w_wall * wall_repulsion
+
+        target = Vec2d(target).normalized()
+
+        self.sphere.reward += 10.0 * change.dot(target)
 
 
     @staticmethod
     def heading_to_vector(heading):
         # heading is in radians
-        return pymunk.vec2d.Vec2d((math.cos(heading), math.sin(heading)))    
+        return Vec2d((math.cos(heading), math.sin(heading)))    
 
 
     def _state(self):
@@ -130,7 +184,6 @@ class SpheresEnv(gym.Env):
 
     def _step(self, action):
         # without this the display is not being rendered.
-        # if self.render_screen and platform.system() == 'Darwin':
         if self.render_screen:
             _ = pygame.event.get()
 
@@ -146,10 +199,6 @@ class SpheresEnv(gym.Env):
         self.sphere.data['previous_position'] = self.sphere.body.position
 
         vector = self.heading_to_vector(action)
-
-        # debug!
-        if '__target' in self.sphere.data:
-            vector = self.sphere.data['__target'].normalized()
 
         self.sphere.body.apply_force_at_local_point(self.force*vector, (0, 0))
 
@@ -280,7 +329,7 @@ class SpheresEnv(gym.Env):
         }
 
         # add bounding box
-        vertices = self._bb_vertices(pymunk.Vec2d(0,0))
+        vertices = self._bb_vertices(Vec2d(0,0))
         bbody = pymunk.Body(1, 1)
 
         bb = pymunk.Poly(bbody, vertices)
