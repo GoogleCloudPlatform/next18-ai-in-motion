@@ -27,7 +27,6 @@ rm -rf $TMP
 
 # submit the training job to CMLE
 BUCKET="gs://YOUR_BUCKET/"
-BUCKET="gs://llama_llama/"
 
 TRAINER_PACKAGE_PATH="./trainer"
 MAIN_TRAINER_MODULE="trainer.task"
