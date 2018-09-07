@@ -10,9 +10,9 @@ Some information is included in this video:
 
 ## Modules
 
-### Object Detection
+### [Object Detection](object_detection)
 
-[Training and serving a realtime mobile object detector in 30 minutes with Cloud TPUs](https://medium.com/tensorflow/training-and-serving-a-realtime-mobile-object-detector-in-30-minutes-with-cloud-tpus-b78971cf1193)
+Train a custom object detection model with Cloud TPUs and export it to the TensorFlow Lite format.
 
 ### [Data Generation](data_generation)
 
