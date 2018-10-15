@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:gravity="center_horizontal"
+    android:layout_gravity="center_horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Select the device ID: "/>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/aCheck"
+                android:layout_width="120dp"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="RED"
+                android:textColor="@color/redColor"
+                android:textStyle="bold" />
+            <RadioButton
+                android:id="@+id/bCheck"
+                android:layout_width="120dp"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="BLUE"
+                android:textColor="@color/blueColor"
+                android:textStyle="bold" />
+            <RadioButton
+                android:id="@+id/cCheck"
+                android:layout_width="120dp"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="GREEN"
+                android:textColor="@color/greenColor"
+                android:textStyle="bold" />
+            <RadioButton
+                android:id="@+id/dCheck"
+                android:layout_width="120dp"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="YELLOW"
+                android:textColor="@color/orangeColor"
+                android:textStyle="bold" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="List of connected Sphero devices"/>
+
+        <TextView
+            android:id="@+id/spheroListTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/connectButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Connect"/>
+
+        <TextView
+            android:id="@+id/calibrationStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="8dp"
+            android:text="Calibration Status: Waiting"/>
+
+        <Button
+            android:id="@+id/verifyCalibration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verify Calibration"/>
+
+        <Button
+            android:id="@+id/restartCalibration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Restart Calibration"/>
+
+        <Button
+            android:id="@+id/startGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Done"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

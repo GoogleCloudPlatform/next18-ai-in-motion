@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:gravity="center"
+    android:layout_gravity="center">
+
+    <TextView
+        android:id="@+id/gametype_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:text="Human Freeze Tag"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Select the color of the connected Sphero:"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/blueBallCheck"
+            android:layout_width="120dp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Blue Ball"
+            android:textColor="@color/blueColor"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/greenBallCheck"
+            android:layout_width="120dp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Green Ball"
+            android:textColor="@color/greenColor"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/pinkBallCheck"
+            android:layout_width="120dp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Pink Ball"
+            android:textColor="@color/pinkColor"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/redBallCheck"
+            android:layout_width="120dp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Red Ball"
+            android:textColor="@color/redColor"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/colorSet"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Set Color"/>
+</LinearLayout>
