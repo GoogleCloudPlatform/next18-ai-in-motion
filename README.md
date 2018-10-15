@@ -10,6 +10,14 @@ Some information is included in this video:
 
 ## Modules
 
+### [AI in Motion](AI_in_Motion)
+
+Android App running the object detection and commander models.
+
+### [Human Freeze Tag](Human_Freeze_Tag)
+
+Android App for player control.
+
 ### [Object Detection](object_detection)
 
 Train a custom object detection model with Cloud TPUs and export it to the TensorFlow Lite format.
