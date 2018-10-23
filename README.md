@@ -8,6 +8,11 @@ Some information is included in this video:
 
 [![IMAGE ALT TEXT](https://img.youtube.com/vi/8V94ZODMM-E/0.jpg)](https://www.youtube.com/watch?v=8V94ZODMM-E "AI in Motion")
 
+We published a few blog posts to help explain the work done to create this demo.
+- [Blog Post - Part 1](https://cloud.google.com/blog/products/ai-machine-learning/ai-motion-designing-simple-system-see-understand-and-react-real-world-part-i#Design_goals)
+- [Blog Post - Part 2](https://cloud.google.com/blog/products/ai-machine-learning/ai-motion-designing-simple-system-see-understand-and-react-real-world-part-ii)
+- [Blog Post - Part 3](https://cloud.google.com/blog/products/ai-machine-learning/ai-in-motion-designing-a-simple-system-to-see-understand-and-react-in-the-real-world-part-iii)
+
 ## Modules
 
 ### [AI in Motion](AI_in_Motion)
