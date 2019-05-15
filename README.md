@@ -17,11 +17,11 @@ We published a few blog posts to help explain the work done to create this demo.
 
 ### [AI in Motion](AI_in_Motion)
 
-Android App running the object detection and commander models.
+Android App for player control.
 
 ### [Human Freeze Tag](Human_Freeze_Tag)
 
-Android App for player control.
+Android App running the object detection and commander models.
 
 ### [Object Detection](object_detection)
 
